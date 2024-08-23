@@ -1,0 +1,4 @@
+Here are all database commands. If you manipulate anything with the db, include the command here.
+
+
+CREATE DATABASE bookworm_buddies;
