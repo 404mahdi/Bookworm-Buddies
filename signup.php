@@ -9,6 +9,8 @@
 <body>
 <div class="container">
         <div class="form-container">
+            <?php
+            ?>
             <h1 class="logo">Bookworm Buddies</h1>
             <form action="signup.php" method="post">
                 <label for="fname">First Name:</label>
@@ -18,6 +20,9 @@
                 <label for="lname">Last Name:</label>
                 <br>
                 <input class="textbox" type="text" name="lname">
+                <br>
+                <label for="dob">Date of Birth:</label><br>
+                <input class="textbox" type="date" id="dob" name="dob" required>
                 <br>
                 <label for="email">Email:</label>
                 <br>
