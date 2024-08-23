@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+  background-image: url(../images/bookwall.jpg);
+  background-size: cover;
+  background-position: center;
+  background-color: black;
+}
+
+.logo {
+  font-family: "Jaro", sans-serif;
+  font-size: 3rem;
+  color: white;
+  text-align: center;
+  margin-top: 5%;
+}
+
+.container {
+  width: 40%;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 5%;
+}
+
+.form-container {
+  font: 1.2rem "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  color: white;
+}
+
+.textbox {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.2rem;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+  background-color: #fa8748;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.anchor {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.anchor:hover {
+  color: #fa8748;
+}
