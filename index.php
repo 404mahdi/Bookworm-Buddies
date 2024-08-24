@@ -22,8 +22,12 @@
                 <br>
                 <?php
                     if(isset($_GET['error'])) {
-                        echo "<div class='message'>
+                        echo "<div class='message' style='color: Red'>
                             <p>Invalid username or password</p>
+                            </div> <br>";
+                    } elseif(isset($_GET['message'])) {
+                        echo "<div class='message'>
+                            <p>Registration Successful!</p>
                             </div> <br>";
                     }
                 ?>

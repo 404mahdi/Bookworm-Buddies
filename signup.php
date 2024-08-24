@@ -38,18 +38,15 @@
                     // Insert the user data into the database
                     $query = "INSERT INTO users(username, password, email, first_name, last_name, date_of_birth, points) VALUES('$username', '$password', '$email', '$fname', '$lname', '$dob', 0)";
                     if (mysqli_query($conn, $query)) {
-                        echo "<div class='message'>
-                            <p>Registration successful!</p>
-                            </div> <br>";
-                        echo "<a href='index.php'><button class='button'><strong>Login Now</strong></button></a>"; 
+                        header('Location: index.php?message=1');
                     } else {
                         echo "<div class='message'>
                             <p>Error: " . mysqli_error($conn) . "</p>
                             </div> <br>";
-                        echo "<a href='javascript:self.history.back()'><button class='button'><strong>Go Back<strong></button></a>";
                     }
                 }
             }
+            $conn->close();
             ?>
             <h1 class="logo">Bookworm Buddies</h1>
             <form action="signup.php" method="post">
