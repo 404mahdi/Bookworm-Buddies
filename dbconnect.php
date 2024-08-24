@@ -5,13 +5,11 @@ $username = "root";
 $password = "";
 $dbname = "bookworm_buddies";
 
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-if($conn->connect_error){
+if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-else{
-    mysqli_select_db($conn, $dbname);
-}
 
+echo "Connected successfully";
 ?>
