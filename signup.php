@@ -13,23 +13,23 @@
             <form action="signup.php" method="post">
                 <label for="fname">First Name:</label>
                 <br>
-                <input class="textbox" type="text" name="fname">
+                <input class="textbox" type="text" name="fname" required>
                 <br>
                 <label for="lname">Last Name:</label>
                 <br>
-                <input class="textbox" type="text" name="lname">
+                <input class="textbox" type="text" name="lname" required>
                 <br>
                 <label for="email">Email:</label>
                 <br>
-                <input class="textbox" type="email" name="email">
+                <input class="textbox" type="email" name="email" required>
                 <br>
                 <label for="username">Username:</label>
                 <br>
-                <input class="textbox" type="text" name="username">
+                <input class="textbox" type="text" name="username" required>
                 <br>
                 <label for="password">Password:</label>
                 <br>
-                <input class="textbox" type="password" name="password">
+                <input class="textbox" type="password" name="password" required>
                 <br>
                 <button class="button"><strong>Sign Up</strong></button>
                 <br>
