@@ -21,7 +21,8 @@
                 <br>
                 <input class="textbox" type="text" name="lname" required>
                 <br>
-                <label for="dob">Date of Birth:</label><br>
+                <label for="dob">Date of Birth:</label>
+                <br>
                 <input class="textbox" type="date" id="dob" name="dob" required>
                 <br>
                 <label for="email">Email:</label>

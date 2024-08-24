@@ -2,3 +2,17 @@ Here are all database commands. If you manipulate anything with the db, include 
 
 
 CREATE DATABASE bookworm_buddies;
+
+USE bookworm_buddies;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    date_of_birth DATE NOT NULL
+);
+
+
