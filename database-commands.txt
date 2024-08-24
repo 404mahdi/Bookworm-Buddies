@@ -15,5 +15,3 @@ CREATE TABLE users (
     date_of_birth DATE NOT NULL,
     points INT
 );
-
-
