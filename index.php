@@ -14,11 +14,11 @@
             <form action="signin.php" method="post">
                 <label for="username">Username:</label>
                 <br>
-                <input class="textbox" type="text" name="username">
+                <input class="textbox" type="text" name="username" required>
                 <br>
                 <label for="password">Password:</label>
                 <br>
-                <input class="textbox" type="password" name="password">
+                <input class="textbox" type="password" name="password" reduired>
                 <br>
                 <?php
                     if(isset($_GET['error'])) {
