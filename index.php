@@ -20,6 +20,13 @@
                 <br>
                 <input class="textbox" type="password" name="password">
                 <br>
+                <?php
+                    if(isset($_GET['error'])) {
+                        echo "<div class='message'>
+                            <p>Invalid username or password</p>
+                            </div> <br>";
+                    }
+                ?>
                 <button class="button"><strong>Sign In</strong></button>
                 <br>
                 <a class="anchor" href="signup.php">Don't have an account? Sign up here!</a>

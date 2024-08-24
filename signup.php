@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/signin.css">
-    <title>Sign Up - Bookworm Buddies</title>
+    <title>Sign Up-Bookworm Buddies</title>
 </head>
 <body>
 <div class="container">
@@ -41,12 +41,12 @@
                         echo "<div class='message'>
                             <p>Registration successful!</p>
                             </div> <br>";
-                        echo "<a href='index.php'><button class='button'>Login Now</button></a>"; 
+                        echo "<a href='index.php'><button class='button'><strong>Login Now</strong></button></a>"; 
                     } else {
                         echo "<div class='message'>
                             <p>Error: " . mysqli_error($conn) . "</p>
                             </div> <br>";
-                        echo "<a href='javascript:self.history.back()'><button class='button'>Go Back</button></a>";
+                        echo "<a href='javascript:self.history.back()'><button class='button'><strong>Go Back<strong></button></a>";
                     }
                 }
             }
