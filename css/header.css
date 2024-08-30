@@ -18,6 +18,12 @@ body {
   color: white;
   font-size: 3rem;
   font-family: "Jaro", sans-serif;
+  margin-right: 5%;
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
 }
 
 .nav-links {
