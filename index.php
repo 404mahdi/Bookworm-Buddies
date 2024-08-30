@@ -10,6 +10,13 @@
 
     <div class="container">
         <div class="form-container">
+            <?php
+                if(isset($_GET['message'])) {
+                    echo "<div class='message'>
+                        <p>Registration Successful.</p>
+                        </div>";
+                }
+            ?>
             <h1 class="logo">Bookworm Buddies</h1>
             <form action="signin.php" method="post">
                 <label for="username">Username:</label>
@@ -25,11 +32,8 @@
                         echo "<div class='message' style='color: Red'>
                             <p>Invalid username or password</p>
                             </div> <br>";
-                    } elseif(isset($_GET['message'])) {
-                        echo "<div class='message'>
-                            <p>Registration Successful!</p>
-                            </div> <br>";
-                    }
+                    } 
+                    
                 ?>
                 <button class="button"><strong>Sign In</strong></button>
                 <br>
