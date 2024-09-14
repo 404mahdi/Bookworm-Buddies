@@ -6,12 +6,49 @@ CREATE DATABASE bookworm_buddies;
 USE bookworm_buddies;
 
 CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    date_of_birth DATE NOT NULL,
-    points INT
+    date_of_birth DATE NOT NULL
+);
+
+CREATE TABLE books (
+    bookID INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(50) NOT NULL,
+    author VARCHAR(50) NOT NULL,
+    year_published INT NOT NULL,
+);
+
+
+CREATE TABLE collection (
+    collectionID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    bookID INT NOT NULL,
+    showcase BOOLEAN NOT NULL, 
+    FOREIGN KEY (userID) REFERENCES users(userID),
+    FOREIGN KEY (bookID) REFERENCES books(bookID)
+);
+
+
+CREATE TABLE swap (
+    swapID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    bookID INT NOT NULL,
+    desired_bookID INT NOT NULL,
+    FOREIGN KEY (userID) REFERENCES users(userID),
+    FOREIGN KEY (bookID) REFERENCES books(bookID),
+    FOREIGN KEY (desired_bookID) REFERENCES books(bookID)
+);
+
+
+CREATE TABLE feedback (
+    feedbackID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    bookID INT NOT NULL,
+    comment VARCHAR(500) NOT NULL,
+    FOREIGN KEY (userID) REFERENCES users(userID),
+    FOREIGN KEY (bookID) REFERENCES books(bookID)
 );
