@@ -21,7 +21,7 @@
         <li><a href="#about">Available Books</a></li>
         <li><a href="#services">Top 10</a></li>
         <li><a href="./history.php">History</a></li>
-        <li><a href="#contact">My profile</a></li>
+        <li><a href="profile.php">My profile</a></li>
       </ul>
     </nav>
 
