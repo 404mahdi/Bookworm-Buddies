@@ -1,0 +1,63 @@
+User Table
+INSERT INTO users (username, password, email, first_name, last_name, date_of_birth) 
+VALUES 
+('booklover1', 'password123', 'booklover1@example.com', 'John', 'Doe', '1990-01-15'),
+('bookworm99', 'password456', 'bookworm99@example.com', 'Jane', 'Smith', '1985-03-22'),
+('novelista', 'secret789', 'novelista@example.com', 'Sarah', 'Brown', '1992-07-10'),
+('pageflipper', 'mypassword', 'pageflipper@example.com', 'Michael', 'Johnson', '1988-12-05'),
+('chapteraddict', 'read4fun', 'chapteraddict@example.com', 'Emily', 'Williams', '1995-08-17'),
+('storychaser', 'bookworld', 'storychaser@example.com', 'Robert', 'Miller', '1993-11-25'),
+('prosefanatic', 'fictiontime', 'prosefanatic@example.com', 'Jessica', 'Davis', '1987-06-14'),
+('librarystalker', 'novelhunter', 'librarystalker@example.com', 'David', 'Garcia', '1991-02-11'),
+('bookenthusiast', 'shelfexplorer', 'bookenthusiast@example.com', 'Laura', 'Martinez', '1994-05-30');
+
+Book Table
+INSERT INTO books (title, author, year_published) 
+VALUES 
+('The Great Gatsby', 'F. Scott Fitzgerald', 1925),
+('1984', 'George Orwell', 1949),
+('To Kill a Mockingbird', 'Harper Lee', 1960),
+('Pride and Prejudice', 'Jane Austen', 1813),
+('Moby Dick', 'Herman Melville', 1851),
+('War and Peace', 'Leo Tolstoy', 1869),
+('The Catcher in the Rye', 'J.D. Salinger', 1951),
+('The Hobbit', 'J.R.R. Tolkien', 1937),
+('Brave New World', 'Aldous Huxley', 1932);
+
+Collection Table
+INSERT INTO collection (userID, bookID, showcase) 
+VALUES 
+(1, 1, TRUE),
+(2, 2, TRUE),
+(3, 3, FALSE),
+(4, 4, TRUE),
+(5, 5, FALSE),
+(6, 6, TRUE),
+(7, 7, FALSE),
+(8, 8, TRUE),
+(9, 9, FALSE);
+
+Swap Table
+INSERT INTO swap (userID, bookID, desired_bookID) 
+VALUES 
+(1, 1, 2),
+(2, 2, 3),
+(3, 3, 4),
+(4, 4, 5),
+(5, 5, 6),
+(6, 6, 7),
+(7, 7, 8),
+(8, 8, 9),
+(9, 9, 1);
+
+Feedback TableINSERT INTO feedback (userID, bookID, comment) 
+VALUES 
+(1, 1, 'Amazing classic! A must-read.'),
+(2, 2, 'Very thought-provoking novel.'),
+(3, 3, 'One of the best books on justice and morality.'),
+(4, 4, 'A timeless romance story.'),
+(5, 5, 'Difficult read but rewarding.'),
+(6, 6, 'Incredible narrative and characters.'),
+(7, 7, 'A controversial but intriguing book.'),
+(8, 8, 'A masterpiece of fantasy literature.'),
+(9, 9, 'Thought-provoking dystopian novel.');

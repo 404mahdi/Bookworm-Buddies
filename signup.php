@@ -32,11 +32,7 @@
                         <p>Username already used. Please, try again.</p>
                         </div> <br>";
                 } else{
-                    // Hash the password for security before storing
-                    // $hashed_password = password_hash($password, PASSWORD_BCRYPT); we can use hashed password for security
-                    
-                    // Insert the user data into the database
-                    $query = "INSERT INTO users(username, password, email, first_name, last_name, date_of_birth, points) VALUES('$username', '$password', '$email', '$fname', '$lname', '$dob', 0)";
+                    $query = "INSERT INTO users(username, password, email, first_name, last_name, date_of_birth) VALUES('$username', '$password', '$email', '$fname', '$lname', '$dob')";
                     if (mysqli_query($conn, $query)) {
                         header('Location: index.php?message=1');
                     } else {
