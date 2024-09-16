@@ -60,26 +60,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/registerbook.css">
+    <link rel="stylesheet" href="./css/design.css">
     <title>Register Book - Bookworm Buddies</title>
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
-
         body {
-        font-family: Arial, sans-serif;
-        background: url('./images/site.png') no-repeat center center fixed;
-        background-size: cover;
-        color: #333;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+            background-image: url("./images/site.png");
+            background-size: cover;
+            background-color: black;
+            color: white;
+            background-repeat: no-repeat;
+            height: 100vh;
+            background-attachment: fixed;
         }
     </style>
 </head>
 <body>
+<?php
+        include("./header.php")
+    ?>
     <div class="container">
         <h1>Add a New Book</h1>
         <form action="registerbook.php" method="post">

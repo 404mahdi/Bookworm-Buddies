@@ -32,6 +32,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/profile.css">
     <title>Update Profile - Bookworm Buddies</title>
+    <style>
+        body {
+            background-image: url("./images/site.png");
+            background-size: cover;
+            background-color: black;
+            color: white;
+            background-repeat: no-repeat;
+            height: 100vh;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
 <body>
 <section class="userinfo">

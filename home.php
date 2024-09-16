@@ -1,5 +1,15 @@
 <?php
-    include("./header.php")
+session_start();
+include 'dbconnect.php';
+include("./header.php");
+
+# Retrieve user ID and username from the session
+$userID = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
+if (!$userID) {
+    header('Location: index.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +28,6 @@
             height: 100vh;
             background-attachment: fixed;
         }
-        
     </style>
 </head>
 <body>

@@ -1,6 +1,6 @@
 <?php
 include 'fetchuserinfo.php';
-
+include("./header.php");
 if (isset($_GET['success']) && $_GET['success'] == 1): ?>
     <p class="success-message">Book registered successfully!</p>
 <?php endif; ?>
@@ -10,20 +10,22 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/profile.css">
+    <link rel="stylesheet" href="./css/design.css">
     <title><?= htmlspecialchars($user['first_name']. " ". $user['last_name']) ?> - Bookworm Buddies</title>
     <style>
         body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: url('./images/site.png') no-repeat center center fixed;
-        background-size: cover;
-        color: #333;
+            background-image: url("./images/site.png");
+            background-size: cover;
+            background-color: black;
+            color: white;
+            background-repeat: no-repeat;
+            height: 100vh;
+            background-attachment: fixed;
         }
     </style>
 </head>
 <body>
+    <div class="wholebody">
     <section class="userinfo">
         <h1>Profile Information:</h1>
         <?php if ($user): ?>
@@ -33,6 +35,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
             <p>Username: <b><?= htmlspecialchars($user['username']) ?></b></p>
             <?php if ($viewingUser == $userID): ?>
                 <button onclick="window.location.href='updateprofile.php'" class="btn-primary">Update Profile</button>
+                <button onclick="window.location.href='logout.php'" class="btn-primary">Logout</button>
             <?php endif; ?>
         <?php else: ?>
             <p>User not found.</p>
@@ -56,5 +59,6 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                 <p>No books in your collection.</p>
             <?php endif; ?>
     </section>
+</div>
 </body>
 </html>
