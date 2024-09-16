@@ -9,9 +9,9 @@
   <body>
     <nav class="navbar">
       <div class="logo"><a href="home.php">BOOKWORM BUDDIES</a></div>
-      <div class="search-box">
-        <input type="text" class="search-bar" placeholder="Search..." />
-        <button class="search-btn">
+      <div id="search-box">
+        <input type="text" id="search-bar" placeholder="Search..." />
+        <button id="search-btn">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>

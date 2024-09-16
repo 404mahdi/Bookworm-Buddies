@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'dbconnect.php';
+include("./header.php");
 
 // Enable error reporting
 ini_set('display_errors', 1);
@@ -60,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/design.css">
+    <link rel="stylesheet" href="./css/signin.css">
     <title>Register Book - Bookworm Buddies</title>
     <style>
         body {
@@ -75,9 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </style>
 </head>
 <body>
-<?php
-        include("./header.php")
-    ?>
+
     <div class="container">
         <h1>Add a New Book</h1>
         <form action="registerbook.php" method="post">
@@ -90,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <label for="publish">Published Year:</label>
             <input class="textbox" type="text" name="publish" required><br>
 
-            <button class="btn-primary" type="submit">Register</button>
+            <button class="button" type="submit">Register</button>
         </form>
 
         <?php if (isset($error)): ?>

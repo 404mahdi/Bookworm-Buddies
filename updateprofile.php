@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/profile.css">
+    <link rel="stylesheet" href="./css/signin.css">
     <title>Update Profile - Bookworm Buddies</title>
     <style>
         body {
@@ -45,31 +45,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </style>
 </head>
 <body>
-<section class="userinfo">
-        <h1>Update Profile Information</h1>
-        <form action="updateprofile.php" method="POST">
+<section class="container">
+        <h1 >Update Profile Information</h1>
+        <form class="form-container" action="updateprofile.php" method="POST">
             <label for="first_name">First Name:</label>
-            <input type="text" id="first_name" name="first_name" value="<?= isset($user['first_name']) ? htmlspecialchars($user['first_name']) : '' ?>" required><br>
+            <input class="textbox" type="text" id="first_name" name="first_name" value="<?= isset($user['first_name']) ? htmlspecialchars($user['first_name']) : '' ?>" required><br>
 
             <label for="last_name">Last Name:</label>
-            <input type="text" id="last_name" name="last_name" value="<?= isset($user['last_name']) ? htmlspecialchars($user['last_name']) : '' ?>" required><br>
+            <input class="textbox" type="text" id="last_name" name="last_name" value="<?= isset($user['last_name']) ? htmlspecialchars($user['last_name']) : '' ?>" required><br>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="<?= isset($user['email']) ? htmlspecialchars($user['email']) : '' ?>" required><br>
+            <input class="textbox" type="email" id="email" name="email" value="<?= isset($user['email']) ? htmlspecialchars($user['email']) : '' ?>" required><br>
 
             <label for="date_of_birth">Date of Birth:</label>
-            <input type="date" id="date_of_birth" name="date_of_birth" value="<?= isset($user['date_of_birth']) ? htmlspecialchars($user['date_of_birth']) : '' ?>" required><br>
+            <input class="textbox" type="date" id="date_of_birth" name="date_of_birth" value="<?= isset($user['date_of_birth']) ? htmlspecialchars($user['date_of_birth']) : '' ?>" required><br>
 
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" value="<?= isset($user['username']) ? htmlspecialchars($user['username']) : '' ?>" required><br>
+            <input class="textbox" type="text" id="username" name="username" value="<?= isset($user['username']) ? htmlspecialchars($user['username']) : '' ?>" required><br>
 
             <label for="password">Password:</label>
-            <input type="text" id="password" name="password" value="<?= isset($user['password']) ? htmlspecialchars($user['password']) : '' ?>" required><br>
+            <input class="textbox" type="text" id="password" name="password" value="<?= isset($user['password']) ? htmlspecialchars($user['password']) : '' ?>" required><br>
 
-            <button type="submit" class="btn-primary">Update</button>
+            <button type="submit" class="button">Update</button>
         </form>
 
-        <button onclick="window.location.href='profile.php'" class="btn-secondary">Back to Profile</button>
+        <button onclick="window.location.href='profile.php'" class="button">Back to Profile</button>
     </section>
 </body>
 </html>

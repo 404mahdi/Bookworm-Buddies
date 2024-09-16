@@ -17,7 +17,7 @@
                         </div>";
                 }
             ?>
-            <h1 class="logo">Bookworm Buddies</h1>
+            <h1 class="logo-s">Bookworm Buddies</h1>
             <form action="signin.php" method="post">
                 <label for="username">Username:</label>
                 <br>

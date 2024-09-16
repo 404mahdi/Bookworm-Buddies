@@ -16,7 +16,7 @@ body {
 
 .logo {
   color: white;
-  font-size: 3rem;
+  font-size: 2.8rem;
   font-family: "Jaro", sans-serif;
   margin-right: 3rem;
 }
@@ -68,7 +68,7 @@ body {
   }
 }
 
-.search-box {
+#search-box {
   display: flex;
   align-items: center;
   background-color: #f1f1f1;
@@ -79,7 +79,7 @@ body {
   margin: 0 auto;
 }
 
-.search-bar {
+#search-bar {
   flex: 1;
   padding: 10px;
   border: none;
@@ -87,7 +87,7 @@ body {
   outline: none;
 }
 
-.search-btn {
+#search-btn {
   background-color: #333;
   color: white;
   border: none;
@@ -99,10 +99,10 @@ body {
   justify-content: center;
 }
 
-.search-btn i {
+#search-btn i {
   font-size: 16px;
 }
 
-.search-btn:hover {
+#search-btn:hover {
   background-color: #555;
 }
