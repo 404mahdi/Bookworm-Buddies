@@ -1,31 +1,86 @@
-.userinfo {
-    background: #ffffff;
+/* Container for profile sections */
+section.userinfo, section.collections {
+    background-color: rgba(255, 255, 255, 0.8); /* White background with slight transparency */
     padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.userinfo p {
-    margin: 0 0 10px;
-}
-
-.btn-primary {
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1rem;
+/* Heading styles */
+h1, h2 {
     text-align: center;
-    text-decoration: none;
-    cursor: pointer;
+    color: #2C3E50;
+}
+
+/* Styling the success message */
+p.success-message {
+    color: green;
+    text-align: center;
+    font-weight: bold;
+    background-color: #EAF8E6;
+    padding: 10px;
+    border: 2px solid #2ECC71;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Button styles */
+button.btn-primary {
+    display: block;
+    width: 200px;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #3498DB;
+    color: #FFF;
     border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
-.btn-primary {
-    background: #007bff;
-    color: #ffffff;
+button.btn-primary:hover {
+    background-color: #2980B9;
 }
 
-.btn-primary:hover {
-    background: #0056b3;
+/* Profile details */
+p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+b {
+    font-weight: bold;
+}
+
+/* Book collection list */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: #ECF0F1;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+ul li:hover {
+    background-color: #BDC3C7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    section.userinfo, section.collections {
+        width: 90%;
+    }
+
+    button.btn-primary {
+        width: 100%;
+    }
 }

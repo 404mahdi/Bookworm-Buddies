@@ -1,6 +1,9 @@
 <?php
 include 'fetchuserinfo.php';
-?>
+
+if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+    <p class="success-message">Book registered successfully!</p>
+<?php endif; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +12,16 @@ include 'fetchuserinfo.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/profile.css">
     <title><?= htmlspecialchars($user['first_name']. " ". $user['last_name']) ?> - Bookworm Buddies</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: url('./images/site.png') no-repeat center center fixed;
+        background-size: cover;
+        color: #333;
+        }
+    </style>
 </head>
 <body>
     <section class="userinfo">

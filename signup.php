@@ -70,7 +70,7 @@
                 <br>
                 <input class="textbox" type="password" name="password" required>
                 <br>
-                <button class="button" name="submit" type="submit"><strong>Sign Up</strong></button>
+                <button class="button" name="submit"type="submit"><strong>Sign Up</strong></button>
                 <br>
             </form>
         </div>
