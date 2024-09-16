@@ -34,16 +34,21 @@ if ($result->num_rows > 0) {
 
 $fetch->close();
 
-# Fetch the books added by the user (collections)
-$collections = $conn->prepare("SELECT books.title, books.author, books.year_published FROM collection JOIN books ON collection.bookID = books.bookID WHERE collection.userID = ?");
+// Fetch all books added by the user (collections)
+$collections = $conn->prepare("SELECT books.bookID, books.title, books.author, books.year_published, collection.showcase FROM collection JOIN books ON collection.bookID = books.bookID WHERE collection.userID = ?");
 $collections->bind_param("i", $viewingUser);
 $collections->execute();
 $collectionResult = $collections->get_result();
 
 $books = [];
+$showcasedBooks = []; // Array to store showcased books separately
+
 if ($collectionResult->num_rows > 0) {
     while ($row = $collectionResult->fetch_assoc()) {
         $books[] = $row; // Add each book to the $books array
+        if ($row['showcase'] == 1) {
+            $showcasedBooks[] = $row; // Add only showcased books to $showcasedBooks
+        }
     }
 }
 

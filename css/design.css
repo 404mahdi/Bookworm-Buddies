@@ -81,7 +81,7 @@
   .btn-primary:hover {
     background-color: #3e8e41;
   }
-  
+
   .error-message {
     color: red;
     margin-bottom: 20px;
@@ -133,4 +133,18 @@
   label {
     display: block;
     margin-bottom: 10px;
+  }
+
+  .option-btn {
+    background-color: #8ea28f;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-right: 1rem;
+  }
+  
+  .option-btn:hover {
+    background-color: #7c977d;
   }
