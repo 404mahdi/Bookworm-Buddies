@@ -33,4 +33,19 @@ if ($result->num_rows > 0) {
 }
 
 $fetch->close();
+
+# Fetch the books added by the user (collections)
+$collections = $conn->prepare("SELECT books.title, books.author, books.year_published FROM collection JOIN books ON collection.bookID = books.bookID WHERE collection.userID = ?");
+$collections->bind_param("i", $viewingUser);
+$collections->execute();
+$collectionResult = $collections->get_result();
+
+$books = [];
+if ($collectionResult->num_rows > 0) {
+    while ($row = $collectionResult->fetch_assoc()) {
+        $books[] = $row; // Add each book to the $books array
+    }
+}
+
+$collections->close();
 ?>

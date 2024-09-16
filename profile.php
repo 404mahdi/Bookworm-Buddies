@@ -27,7 +27,21 @@ include 'fetchuserinfo.php';
     </section>
 
     <section class="collections">
-        <!-- Collections can be added here -->
+        <h2>Book Collection:</h2>
+            <button onclick="window.location.href='registerbook.php'" class="btn-primary">Register New Book</button>
+            <?php if (!empty($books)): ?>
+                <ul>
+                    <?php foreach ($books as $book): ?>
+                        <li>
+                            <b>Title:</b> <?= htmlspecialchars($book['title']) ?><br>
+                            <b>Author:</b> <?= htmlspecialchars($book['author']) ?><br>
+                            <b>Published Year:</b> <?= htmlspecialchars($book['year_published']) ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
+                <p>No books in your collection.</p>
+            <?php endif; ?>
     </section>
 </body>
 </html>
