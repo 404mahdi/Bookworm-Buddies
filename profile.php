@@ -37,6 +37,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                 <!-- Only show update and logout buttons if the logged-in user is viewing their own profile -->
                 <?php if ($viewingUser == $userID): ?>
                     <button onclick="window.location.href='updateprofile.php'" class="btn-primary">Update Profile</button>
+                    <button onclick="window.location.href='deleteaccount.php'" class="btn-primary">Delete Account</button>
                     <button onclick="window.location.href='logout.php'" class="btn-primary">Logout</button>
                 <?php endif; ?>
             <?php else: ?>
@@ -72,6 +73,8 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                         <b>Author:</b> <?= isset($book['author']) ? htmlspecialchars($book['author']) : 'Unknown' ?><br>
                         <b>Published Year:</b> <?= isset($book['year_published']) ? htmlspecialchars($book['year_published']) : 'Unknown' ?><br>
                         <br>
+                        <button onclick="window.location.href='editbookdetails.php?bookID=<?= htmlspecialchars($book['bookID']) ?>'" class="btn-primary">Edit</button>
+                        <button onclick="window.location.href='deletebook.php?bookID=<?= htmlspecialchars($book['bookID']) ?>'" class="btn-primary">Delete</button><br><br>
                         <!-- Show the "Showcase" button only if viewing user's own profile -->
                         <?php if ($viewingUser == $userID && isset($book['bookID']) && $book['showcase'] == 0): ?>
                             <button onclick="window.location.href='showcase.php?bookID=<?= htmlspecialchars($book['bookID']) ?>'" class="btn-primary">Showcase</button>
