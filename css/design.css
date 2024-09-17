@@ -1,151 +1,74 @@
-/* Global Styles */
 .wholebody {
-  margin: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 50px;
 }
-h1,
-h2 {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-p {
-  margin-bottom: 20px;
-}
-
-/* Profile Styles */
 
 .userinfo {
-  margin-top: 20px;
-  padding: 20px;
   background-color: rgba(0, 0, 0, 0.5);
-}
-
-.userinfo h1 {
-  margin-top: 0;
+  padding: 30px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  width: 50%;
 }
 
 .collections {
-  margin-top: 20px;
-}
-
-.collections ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.collections li {
-  margin-bottom: 10px;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-}
-
-.collections li:last-child {
-  border-bottom: none;
-}
-
-/* Register Book Styles */
-
-.container {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 20px;
   background-color: rgba(0, 0, 0, 0.5);
-}
-
-.textbox {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-}
-
-.textbox:focus {
-  border-color: #aaa;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 20px;
+  width: 50%;
 }
 
 .btn-primary {
   background-color: #fa8748;
-  color: #fff;
-  padding: 10px 20px;
   border: none;
+  color: white;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  margin-right: 1rem;
+  margin-right: 10px;
+  font-weight: bold;
 }
 
 .btn-primary:hover {
-  background-color: #f97b3d;
-}
-
-.error-message {
-  color: red;
-  margin-bottom: 20px;
+  background-color: #f36f21;
 }
 
 .success-message {
-  color: green;
-  margin-bottom: 20px;
-}
-
-/* Responsive Design */
-
-@media only screen and (max-width: 768px) {
-  .container {
-    margin: 20px auto;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .container {
-    margin: 10px auto;
-  }
-  .textbox {
-    width: 90%;
-  }
-}
-
-/* Additional Styles */
-
-button {
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+  background-color: #28a745;
+  color: white;
   padding: 10px;
+  border-radius: 5px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
+  width: 90%;
+  margin-left: 5%;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-  border-color: #aaa;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.error-message {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  width: 90%;
+  margin-left: 5%;
 }
 
-label {
-  display: block;
-  margin-bottom: 10px;
+/* List styling for books */
+
+.collections ul {
+  list-style: none;
+  padding: 0;
 }
 
-.option-btn {
-  background-color: #8ea28f;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
-  margin-right: 1rem;
+.collections ul li {
+  margin: 10px;
+  padding: 15px;
+  border-radius: 5px;
 }
 
-.option-btn:hover {
-  background-color: #7c977d;
+.collections li b {
+  font-weight: bold;
 }

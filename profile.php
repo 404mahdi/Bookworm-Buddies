@@ -71,7 +71,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                         <b>Title:</b> <?= isset($book['title']) ? htmlspecialchars($book['title']) : 'Unknown' ?><br>
                         <b>Author:</b> <?= isset($book['author']) ? htmlspecialchars($book['author']) : 'Unknown' ?><br>
                         <b>Published Year:</b> <?= isset($book['year_published']) ? htmlspecialchars($book['year_published']) : 'Unknown' ?><br>
-
+                        <br>
                         <!-- Show the "Showcase" button only if viewing user's own profile -->
                         <?php if ($viewingUser == $userID && isset($book['bookID']) && $book['showcase'] == 0): ?>
                             <button onclick="window.location.href='showcase.php?bookID=<?= htmlspecialchars($book['bookID']) ?>'" class="btn-primary">Showcase</button>
