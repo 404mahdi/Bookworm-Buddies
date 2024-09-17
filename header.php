@@ -19,8 +19,8 @@
       <ul class="nav-links">
         <li><a href="./home.php">Home</a></li>
         <li><a href="#about">Available Books</a></li>
-        <li><a href="#services">Top 10</a></li>
-        <li><a href="./history.php">History</a></li>
+        <li><a href="./registerbook.php">Add Book</a></li>
+        <li><a href="./Requests">Requests</a></li>
         <li><a href="./profile.php">My profile</a></li>
       </ul>
     </nav>
