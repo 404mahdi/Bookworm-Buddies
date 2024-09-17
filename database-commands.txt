@@ -52,3 +52,5 @@ CREATE TABLE feedback (
     FOREIGN KEY (userID) REFERENCES users(userID),
     FOREIGN KEY (bookID) REFERENCES books(bookID)
 );
+
+ALTER TABLE collection MODIFY COLUMN showcase BOOLEAN NOT NULL DEFAULT 0;
