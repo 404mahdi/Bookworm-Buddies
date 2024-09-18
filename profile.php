@@ -129,8 +129,12 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                                             
                                             <!-- User options to delete their own feedback -->
                                             <?php if ($feedback['userID'] == $userID): ?>
-                                                <a href="deletefeedback.php?feedbackID=<?= htmlspecialchars($feedback['feedbackID']) ?>" class="btn-primary" style="padding: 10px 10px" onclick="return confirm('Are you sure you want to delete this feedback?');">Delete</a>
+                                                <form action="deletefeedback.php" method="post" style="display: inline;">
+                                                <input type="hidden" name="feedbackID" value="<?= htmlspecialchars($feedback['feedbackID']) ?>">
+                                                <button type="submit" class="btn-primary" style="padding: 10px 10px;">Delete</button>
+                                                </form>
                                             <?php endif; ?>
+
 
                                             <!-- Book owner can reply to feedback -->
                                             <?php if ($viewingUser == $userID && $feedback['userID'] != $userID): ?>
