@@ -20,14 +20,31 @@ $swapRequestsResult = $swapRequestsQuery->get_result();
     <link rel="stylesheet" href="./css/design.css">
     <title>Swap Requests</title>
     <style>
-        .swap-request { margin-bottom: 20px; }
-        .btn-primary { background-color: #007bff; }
+        body {
+            background-image: url("./images/site.png");
+            background-size: cover;
+            background-color: black;
+            color: white;
+            background-repeat: no-repeat;
+            height: 100vh;
+            background-attachment: fixed;
+        }
+        .swap-request  {
+            flex: 1 1 calc(33.333% - 20px);
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
         .btn-danger { background-color: #dc3545; }
         .waiting-msg, .accepted-msg, .declined-msg { margin-top: 10px; }
     </style>
 </head>
 <body>
-<div class="swap-container">
+<div class="wholebody">
+<div class="collections">
     <h1>Swap Requests</h1>
     <?php while ($swapRequestRow = $swapRequestsResult->fetch_assoc()): ?>
         <div class="swap-request">
@@ -50,7 +67,8 @@ $swapRequestsResult = $swapRequestsQuery->get_result();
             <?php endif; ?>
         </div>
     <?php endwhile; ?>
-</div>    
+</div>
+</div>  
 </body>
 </html>
 

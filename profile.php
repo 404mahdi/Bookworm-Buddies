@@ -173,12 +173,12 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                 <h2>Swapped Books:</h2>
 
                 <?php
-                // Fetch swapped books for the user
+                // Fetch swapped books for the user with 'accepted' status
                 $swappedBooksQuery = $conn->prepare("
-                    SELECT b.bookID, b.title, b.author, b.year_published, s.status
+                    SELECT b.bookID, b.title, b.author, b.year_published
                     FROM books b
                     JOIN swap s ON (b.bookID = s.bookID OR b.bookID = s.desired_bookID)
-                    WHERE (s.requesterID = ? OR s.ownerID = ?) AND s.status IN ('accepted', 'returned')
+                    WHERE (s.requesterID = ? OR s.ownerID = ?) AND s.status = 'accepted'
                 ");
                 $swappedBooksQuery->bind_param("ii", $userID, $userID);
                 $swappedBooksQuery->execute();
@@ -190,8 +190,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                             <li>
                                 <b>Title:</b> <?= htmlspecialchars($swappedBook['title']) ?><br>
                                 <b>Author:</b> <?= htmlspecialchars($swappedBook['author']) ?><br>
-                                <b>Published Year:</b> <?= htmlspecialchars($swappedBook['year_published']) ?><br>
-                                <b>Status:</b> <?= htmlspecialchars($swappedBook['status']) ?>
+                                <b>Published Year:</b> <?= htmlspecialchars($swappedBook['year_published']) ?>
                             </li>
                         <?php endwhile; ?>
                     </ul>
