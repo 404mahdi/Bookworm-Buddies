@@ -32,13 +32,18 @@ CREATE TABLE collection (
     FOREIGN KEY (bookID) REFERENCES books(bookID)
 );
 
-
+NEW SWAP TABLE
 CREATE TABLE swap (
     swapID INT AUTO_INCREMENT PRIMARY KEY,
-    userID INT NOT NULL,
-    bookID INT NOT NULL,
-    desired_bookID INT NOT NULL,
-    FOREIGN KEY (userID) REFERENCES users(userID),
+    requesterID INT NOT NULL,              -- The user requesting the swap
+    ownerID INT NOT NULL,                  -- The owner of the book being requested
+    bookID INT NOT NULL,                   -- The book owned by the owner
+    desired_bookID INT NOT NULL,           -- The book owned by the requester (if swapping both ways)
+    status ENUM('pending', 'accepted', 'declined', 'returned') DEFAULT 'pending',  -- Status of the request
+    message TEXT DEFAULT NULL,             -- Optional message related to the request (e.g., reason for decline)
+    request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- When the request was made
+    FOREIGN KEY (requesterID) REFERENCES users(userID),
+    FOREIGN KEY (ownerID) REFERENCES users(userID),
     FOREIGN KEY (bookID) REFERENCES books(bookID),
     FOREIGN KEY (desired_bookID) REFERENCES books(bookID)
 );
@@ -54,3 +59,15 @@ CREATE TABLE feedback (
 );
 
 ALTER TABLE collection MODIFY COLUMN showcase BOOLEAN NOT NULL DEFAULT 0;
+
+
+OLD SWAP TABLE
+CREATE TABLE swap (
+    swapID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    bookID INT NOT NULL,
+    desired_bookID INT NOT NULL,
+    FOREIGN KEY (userID) REFERENCES users(userID),
+    FOREIGN KEY (bookID) REFERENCES books(bookID),
+    FOREIGN KEY (desired_bookID) REFERENCES books(bookID)
+);
