@@ -1,32 +1,15 @@
 <?php
-session_start();
-include "header.php";
-include 'dbconnect.php';
+include("./header.php");
+include 'fetchuserinfo.php';
 
-// Get the current user ID from the session
-$userID = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
-
-if (!$userID) {
-    header('Location: index.php');
-    exit();
-}
-
-// Fetch requests where the current user is either the requester or owner
-$query = $conn->prepare("
-    SELECT swap.swapID, swap.requesterID, swap.ownerID, swap.bookID, swap.desired_bookID, swap.status, swap.message, 
-           r.username AS requester_username, o.username AS owner_username, 
-           b.title AS book_title, d.title AS desired_book_title
-    FROM swap
-    JOIN users AS r ON swap.requesterID = r.userID
-    JOIN users AS o ON swap.ownerID = o.userID
-    JOIN books AS b ON swap.bookID = b.bookID
-    JOIN books AS d ON swap.desired_bookID = d.bookID
-    WHERE swap.requesterID = ? OR swap.ownerID = ?
+// Fetch swap requests
+$swapRequestsQuery = $conn->prepare("
+    SELECT * FROM swap
+    WHERE ownerID = ? OR requesterID = ?
 ");
-
-$query->bind_param("ii", $userID, $userID);
-$query->execute();
-$result = $query->get_result();
+$swapRequestsQuery->bind_param("ii", $userID, $userID);
+$swapRequestsQuery->execute();
+$swapRequestsResult = $swapRequestsQuery->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -35,54 +18,43 @@ $result = $query->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/design.css">
-    <title>Requests - Bookworm Buddies</title>
+    <title>Swap Requests</title>
     <style>
-        body {
-            background-image: url("./images/site.png");
-            background-size: cover;
-            background-color: black;
-            color: white;
-            background-repeat: no-repeat;
-            height: 100vh;
-            background-attachment: fixed;
-        }
+        .swap-request { margin-bottom: 20px; }
+        .btn-primary { background-color: #007bff; }
+        .btn-danger { background-color: #dc3545; }
+        .waiting-msg, .accepted-msg, .declined-msg { margin-top: 10px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Swap Requests</h1>
-        <div class="request-list">
-            <?php if ($result->num_rows > 0): ?>
-                <?php while ($row = $result->fetch_assoc()): ?>
-                    <div class="request-box">
-                        <p><b>Requested book:</b> <?= htmlspecialchars($row['desired_book_title']) ?></p>
-                        <p><b>Requested by:</b> <a href="profile.php?userID=<?= htmlspecialchars($row['requesterID']) ?>" class="link"><?= htmlspecialchars($row['requester_username']) ?></a></p>
-                        <p><b>Status:</b> <?= htmlspecialchars($row['status']) ?></p>
-                        <?php if ($userID == $row['ownerID']): ?>
-                            <?php if ($row['status'] == 'pending'): ?>
-                                <a href="handlerequest.php?swapID=<?= htmlspecialchars($row['swapID']) ?>&action=accept" class="btn-primary">Accept</a>
-                                <a href="handlerequest.php?swapID=<?= htmlspecialchars($row['swapID']) ?>&action=decline" class="btn-primary">Decline</a>
-                            <?php endif; ?>
-                        <?php elseif ($userID == $row['requesterID']): ?>
-                            <?php if ($row['status'] == 'accepted'): ?>
-                                <a href="handlerequest.php?swapID=<?= htmlspecialchars($row['swapID']) ?>&action=return" class="btn-primary">Return Book</a>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                        <?php if ($row['status'] == 'declined'): ?>
-                            <p><b>Message:</b> <?= htmlspecialchars($row['message']) ?></p>
-                        <?php endif; ?>
-                    </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <p>No requests found.</p>
+<div class="swap-container">
+    <h1>Swap Requests</h1>
+    <?php while ($swapRequestRow = $swapRequestsResult->fetch_assoc()): ?>
+        <div class="swap-request">
+            <h3>Swap Request Details</h3>
+            <p><strong>Book ID:</strong> <?= htmlspecialchars($swapRequestRow['bookID']) ?></p>
+            <p><strong>Requester ID:</strong> <?= htmlspecialchars($swapRequestRow['requesterID']) ?></p>
+            <p><strong>Owner ID:</strong> <?= htmlspecialchars($swapRequestRow['ownerID']) ?></p>
+            <p><strong>Status:</strong> <?= htmlspecialchars($swapRequestRow['status']) ?></p>
+            
+            <?php if ($swapRequestRow['status'] == 'pending' && $swapRequestRow['ownerID'] == $userID): ?>
+                <button onclick="window.location.href='acceptswap.php?swapID=<?= $swapRequestRow['swapID'] ?>'" class="btn-primary">Accept</button>
+                <button onclick="window.location.href='declineswap.php?swapID=<?= $swapRequestRow['swapID'] ?>'" class="btn-danger">Decline</button>
+            <?php elseif ($swapRequestRow['status'] == 'pending' && $swapRequestRow['requesterID'] == $userID): ?>
+                <p class="waiting-msg">Waiting for owner's response...</p>
+            <?php elseif ($swapRequestRow['status'] == 'accepted'): ?>
+                <p class="accepted-msg">Swap accepted! Complete the swap now.</p>
+                <button onclick="window.location.href='returnbook.php?swapID=<?= $swapRequestRow['swapID'] ?>'" class="btn-primary">Mark as Returned</button>
+            <?php elseif ($swapRequestRow['status'] == 'declined'): ?>
+                <p class="declined-msg">Swap declined.</p>
             <?php endif; ?>
         </div>
-        <br><button onclick="window.location.href='home.php'" class="btn-secondary">Back to Home</button>
-    </div>
+    <?php endwhile; ?>
+</div>    
 </body>
 </html>
 
 <?php
-$query->close();
+$swapRequestsQuery->close();
 $conn->close();
 ?>

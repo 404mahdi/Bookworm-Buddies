@@ -89,21 +89,53 @@ $result = $booksFromAllUsers->get_result();
     <div class="container">
         <h1>Books From All Users</h1>
         <div class="book-list">
-            <?php if ($result->num_rows > 0): ?>
-                <?php while ($row = $result->fetch_assoc()): ?>
-                    <div class="book-box">
-                        <h2>Title: <?= htmlspecialchars($row['title']) ?></h2>
-                        <p><b>Author:</b> <?= htmlspecialchars($row['author']) ?></p>
-                        <p><b>Published Year:</b> <?= htmlspecialchars($row['year_published']) ?></p>
-                        <p><b>Owner:</b> <a href="profile.php?userID=<?= htmlspecialchars($row['userID']) ?>" class="link"><?= htmlspecialchars($row['username']) ?></a></p>
-                        <?php if ($row['userID'] != $userID): ?>
-                            <button onclick="window.location.href='requestbook.php?bookID=<?= $row['bookID'] ?>'" class="btn-primary">Request For Swap</button>
-                        <?php endif; ?>
-                    </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <p>No books found.</p>
-            <?php endif; ?>
+        <?php if ($result->num_rows > 0): // Check if there are books available ?>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <div class="book-box">
+                    <h2>Title: <?= htmlspecialchars($row['title']) ?></h2>
+                    <p><b>Author:</b> <?= htmlspecialchars($row['author']) ?></p>
+                    <p><b>Published Year:</b> <?= htmlspecialchars($row['year_published']) ?></p>
+                    <p><b>Owner:</b> <a href="profile.php?userID=<?= htmlspecialchars($row['userID']) ?>" class="link"><?= htmlspecialchars($row['username']) ?></a></p>
+                    
+                    <?php
+$checkExistingRequest = $conn->prepare("
+    SELECT * FROM swap
+    WHERE requesterID = ? AND bookID = ? AND status IN ('pending', 'accepted')
+");
+$checkExistingRequest->bind_param("ii", $userID, $row['bookID']);
+$checkExistingRequest->execute();
+$existingRequestResult = $checkExistingRequest->get_result();
+
+if ($row['userID'] == $userID) {
+    // The user is the owner of the book, don't show any swap options
+    ?>
+    <?php
+} elseif ($existingRequestResult->num_rows > 0) {
+    $existingRequestRow = $existingRequestResult->fetch_assoc();
+    if ($existingRequestRow['status'] == 'pending') {
+        // Display "Request Sent" button
+        ?>
+        <button class="btn-primary" disabled>Request Sent</button>
+        <?php
+    } elseif ($existingRequestRow['status'] == 'accepted') {
+        // Display "Not Available" button
+        ?>
+        <button class="btn-primary" disabled>Not Available</button>
+        <?php
+    }
+} else {
+    // Display "Request For Swap" button
+    ?>
+    <button onclick="window.location.href='requestbook.php?bookID=<?= $row['bookID'] ?>'" class="btn-primary">Request For Swap</button>
+    <?php
+}
+?>
+
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p>No books found.</p>
+        <?php endif; ?>
         </div>
         <button onclick="window.location.href='home.php'" class="btn-secondary">Back to Home</button>
     </div>

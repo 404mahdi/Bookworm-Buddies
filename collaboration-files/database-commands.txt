@@ -35,17 +35,17 @@ CREATE TABLE collection (
 NEW SWAP TABLE
 CREATE TABLE swap (
     swapID INT AUTO_INCREMENT PRIMARY KEY,
-    requesterID INT NOT NULL,              -- The user requesting the swap
-    ownerID INT NOT NULL,                  -- The owner of the book being requested
-    bookID INT NOT NULL,                   -- The book owned by the owner
-    desired_bookID INT NOT NULL,           -- The book owned by the requester (if swapping both ways)
-    status ENUM('pending', 'accepted', 'declined', 'returned') DEFAULT 'pending',  -- Status of the request
-    message TEXT DEFAULT NULL,             -- Optional message related to the request (e.g., reason for decline)
-    request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- When the request was made
-    FOREIGN KEY (requesterID) REFERENCES users(userID),
-    FOREIGN KEY (ownerID) REFERENCES users(userID),
-    FOREIGN KEY (bookID) REFERENCES books(bookID),
-    FOREIGN KEY (desired_bookID) REFERENCES books(bookID)
+    requesterID INT NOT NULL,              
+    ownerID INT NOT NULL,                  
+    bookID INT NOT NULL,                   
+    desired_bookID INT DEFAULT NULL,       -- Allow NULL for optional field
+    status ENUM('pending', 'accepted', 'declined', 'returned') DEFAULT 'pending',  
+    message TEXT DEFAULT NULL,             
+    request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
+    FOREIGN KEY (requesterID) REFERENCES users(userID) ON DELETE CASCADE,
+    FOREIGN KEY (ownerID) REFERENCES users(userID) ON DELETE CASCADE,
+    FOREIGN KEY (bookID) REFERENCES books(bookID) ON DELETE CASCADE,
+    FOREIGN KEY (desired_bookID) REFERENCES books(bookID) ON DELETE SET NULL
 );
 
 
@@ -53,13 +53,25 @@ CREATE TABLE feedback (
     feedbackID INT AUTO_INCREMENT PRIMARY KEY,
     userID INT NOT NULL,
     bookID INT NOT NULL,
-    comment VARCHAR(500) NOT NULL,
+    comment VARCHAR(500),
     reply VARCHAR(500),
     FOREIGN KEY (userID) REFERENCES users(userID),
     FOREIGN KEY (bookID) REFERENCES books(bookID)
 );
 
+
 ALTER TABLE collection MODIFY COLUMN showcase BOOLEAN NOT NULL DEFAULT 0;
+
+
+NEW TABLE
+CREATE TABLE notifications (
+    notificationID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,  -- ID of the user who receives the notification
+    message TEXT NOT NULL,  -- Notification message
+    is_read TINYINT(1) DEFAULT 0,  -- 0 for unread, 1 for read
+    notification_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- When the notification was created
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
+);
 
 
 OLD SWAP TABLE
