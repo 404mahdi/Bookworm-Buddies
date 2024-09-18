@@ -23,6 +23,26 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
             height: 100vh;
             background-attachment: fixed;
         }
+
+        .commentbox {
+            width: 30%;
+            max-width: 500px; /* Adjust as needed */
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            resize: vertical; /* Allow vertical resizing */
+        }
+
+        .commentbox:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
     </style>
 </head>
 <body>
@@ -50,9 +70,9 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
         
             <!-- All Books, Showcased Books, Register New Book Options -->
             <div>
+                <?php if ($viewingUser == $userID): ?>
                 <button onclick="window.location.href='?userID=<?= $viewingUser ?>&show=all'" class="btn-primary">All Books</button>
                 <button onclick="window.location.href='?userID=<?= $viewingUser ?>&show=showcased'" class="btn-primary">Showcased Books</button>
-                <?php if ($viewingUser == $userID): ?>
                 <button onclick="window.location.href='registerbook.php'" class="btn-primary">Register New Book</button>
                 <?php endif; ?>
             </div>
@@ -83,13 +103,65 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                                     <button onclick="window.location.href='removeshowcase.php?bookID=<?= htmlspecialchars($book['bookID']) ?>'" class="btn-primary">Remove from Showcase</button>
                                 <?php endif; ?>
                             <?php endif; ?>
+
+                            <!-- Feedback section -->
+                            <?php if ($viewingUser != $userID): ?>
+                                <form action="submitfeedback.php" method="post">
+                                    <input type="hidden" name="bookID" value="<?= htmlspecialchars($book['bookID']) ?>">
+                                    <textarea name="comment" class="commentbox" placeholder="Leave your feedback here" required></textarea><br>
+                                    <button type="submit" class="btn-primary">Submit Feedback</button>
+                                </form>
+                            <?php endif; ?>
+
+                            <h3>Feedback:</h3>
+                            <ul>
+                                <?php
+                                $feedbackQuery = $conn->prepare("SELECT feedback.feedbackID, feedback.comment, feedback.userID, feedback.reply, users.username FROM feedback JOIN users ON feedback.userID = users.userID WHERE feedback.bookID = ?");
+                                $feedbackQuery->bind_param("i", $book['bookID']);
+                                $feedbackQuery->execute();
+                                $feedbackResult = $feedbackQuery->get_result();
+
+                                if ($feedbackResult->num_rows > 0): 
+                                    while ($feedback = $feedbackResult->fetch_assoc()): ?>
+                                        <li>
+                                            <b><a href="profile.php?userID=<?= htmlspecialchars($feedback['userID']) ?>" class="username-link"><?= htmlspecialchars($feedback['username']) ?></a>:</b> 
+                                            <?= htmlspecialchars($feedback['comment']) ?><br>
+                                            
+                                            <!-- User options to delete their own feedback -->
+                                            <?php if ($feedback['userID'] == $userID): ?>
+                                                <a href="deletefeedback.php?feedbackID=<?= htmlspecialchars($feedback['feedbackID']) ?>" class="btn-primary" style="padding: 10px 10px" onclick="return confirm('Are you sure you want to delete this feedback?');">Delete</a>
+                                            <?php endif; ?>
+
+                                            <!-- Book owner can reply to feedback -->
+                                            <?php if ($viewingUser == $userID && $feedback['userID'] != $userID): ?>
+                                                <form action="replyfeedback.php" method="post">
+                                                    <input type="hidden" name="feedbackID" value="<?= htmlspecialchars($feedback['feedbackID']) ?>">
+                                                    <textarea name="reply" class="commentbox" placeholder="Reply to this feedback" required></textarea><br>
+                                                    <button type="submit" class="btn-primary">Submit Reply</button>
+                                                </form>
+                                            <?php endif; ?>
+
+                                            <!-- Display reply if exists -->
+                                            <?php if (!empty($feedback['reply'])): ?>
+                                                <div class="reply">
+                                                    <b>Reply from Book Owner:</b> <?= htmlspecialchars($feedback['reply']) ?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </li>
+                                    <?php endwhile;
+                                else: ?>
+                                    <p>No feedback available for this book.</p>
+                                <?php endif; ?>
+                            </ul>
+
                         </li>
                     <?php endforeach; ?>
                 </ul>
             <?php else: ?>
                 <p>No books available.</p>
-        <?php endif; ?>
-    </section>
+            <?php endif; ?>
+        </section>
+    </div>
     <script>
     function confirmDeleteAccount() {
         const confirmed = confirm("Are you sure you want to delete your account?");
@@ -97,7 +169,6 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
             window.location.href = 'deleteaccount.php';
         }
     }
-</script>
-</div>
+    </script>
 </body>
 </html>

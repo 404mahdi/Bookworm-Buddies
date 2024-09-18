@@ -54,6 +54,7 @@ CREATE TABLE feedback (
     userID INT NOT NULL,
     bookID INT NOT NULL,
     comment VARCHAR(500) NOT NULL,
+    reply VARCHAR(500),
     FOREIGN KEY (userID) REFERENCES users(userID),
     FOREIGN KEY (bookID) REFERENCES books(bookID)
 );
