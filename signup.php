@@ -44,7 +44,7 @@
             }
             $conn->close();
             ?>
-            <h1 class="logo">Bookworm Buddies</h1>
+            <h1 class="logo-s">Bookworm Buddies</h1>
             <form action="signup.php" method="post">
                 <label for="fname">First Name:</label>
                 <br>
