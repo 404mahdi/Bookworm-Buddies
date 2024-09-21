@@ -1,5 +1,6 @@
 <?php
 include 'fetchuserinfo.php'; // Ensure user authentication and connection setup
+include "header.php";
 
 // Get the search query from the user
 $searchQuery = isset($_GET['q']) ? trim($_GET['q']) : '';
@@ -40,7 +41,23 @@ $userResults = $userSearchQuery->get_result();
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results</title>
+    <style>
+        body {
+            background-image: url("./images/site.png");
+            background-size: cover;
+            background-color: black;
+            color: white;
+            background-repeat: no-repeat;
+            height: 100vh;
+            background-attachment: fixed;
+            text-align: center;
+        }        
+
+    </style>
+
 </head>
 <body>
     <h1>Search Results for "<?php echo htmlspecialchars($_GET['q']); ?>"</h1>

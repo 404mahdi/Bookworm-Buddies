@@ -32,7 +32,7 @@ CREATE TABLE collection (
     FOREIGN KEY (bookID) REFERENCES books(bookID)
 );
 
-NEW SWAP TABLE
+-- NEW SWAP TABLE
 CREATE TABLE swap (
     swapID INT AUTO_INCREMENT PRIMARY KEY,
     requesterID INT NOT NULL,              
