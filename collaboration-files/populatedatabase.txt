@@ -1,63 +1,114 @@
 User Table
-INSERT INTO users (username, password, email, first_name, last_name, date_of_birth) 
-VALUES 
-('booklover1', 'password123', 'booklover1@example.com', 'John', 'Doe', '1990-01-15'),
-('bookworm99', 'password456', 'bookworm99@example.com', 'Jane', 'Smith', '1985-03-22'),
-('novelista', 'secret789', 'novelista@example.com', 'Sarah', 'Brown', '1992-07-10'),
-('pageflipper', 'mypassword', 'pageflipper@example.com', 'Michael', 'Johnson', '1988-12-05'),
-('chapteraddict', 'read4fun', 'chapteraddict@example.com', 'Emily', 'Williams', '1995-08-17'),
-('storychaser', 'bookworld', 'storychaser@example.com', 'Robert', 'Miller', '1993-11-25'),
-('prosefanatic', 'fictiontime', 'prosefanatic@example.com', 'Jessica', 'Davis', '1987-06-14'),
-('librarystalker', 'novelhunter', 'librarystalker@example.com', 'David', 'Garcia', '1991-02-11'),
-('bookenthusiast', 'shelfexplorer', 'bookenthusiast@example.com', 'Laura', 'Martinez', '1994-05-30');
+INSERT INTO users (username, password, email, first_name, last_name, date_of_birth) VALUES
+('jane_doe', 'password123', 'jane.doe@email.com', 'Jane', 'Doe', '1990-05-10'),
+('john_smith', 'password123', 'john.smith@email.com', 'John', 'Smith', '1985-02-17'),
+('alice_jones', 'password123', 'alice.jones@email.com', 'Alice', 'Jones', '1992-07-30'),
+('bob_brown', 'password123', 'bob.brown@email.com', 'Bob', 'Brown', '1980-11-20'),
+('charlie_wilson', 'password123', 'charlie.wilson@email.com', 'Charlie', 'Wilson', '1995-09-03'),
+('danielle_taylor', 'password123', 'danielle.taylor@email.com', 'Danielle', 'Taylor', '1988-12-12'),
+('edward_moore', 'password123', 'edward.moore@email.com', 'Edward', 'Moore', '1993-04-25'),
+('frances_hall', 'password123', 'frances.hall@email.com', 'Frances', 'Hall', '1997-01-15'),
+('george_lee', 'password123', 'george.lee@email.com', 'George', 'Lee', '1989-06-28'),
+('hannah_white', 'password123', 'hannah.white@email.com', 'Hannah', 'White', '1991-03-22');
+
 
 Book Table
-INSERT INTO books (title, author, year_published) 
-VALUES 
+INSERT INTO books (title, author, year_published) VALUES
 ('The Great Gatsby', 'F. Scott Fitzgerald', 1925),
-('1984', 'George Orwell', 1949),
 ('To Kill a Mockingbird', 'Harper Lee', 1960),
+('1984', 'George Orwell', 1949),
 ('Pride and Prejudice', 'Jane Austen', 1813),
-('Moby Dick', 'Herman Melville', 1851),
-('War and Peace', 'Leo Tolstoy', 1869),
+('Moby-Dick', 'Herman Melville', 1851),
 ('The Catcher in the Rye', 'J.D. Salinger', 1951),
-('The Hobbit', 'J.R.R. Tolkien', 1937),
-('Brave New World', 'Aldous Huxley', 1932);
+('War and Peace', 'Leo Tolstoy', 1869),
+('Crime and Punishment', 'Fyodor Dostoevsky', 1866),
+('Ulysses', 'James Joyce', 1922),
+('The Odyssey', 'Homer', 1800);
 
 Collection Table
-INSERT INTO collection (userID, bookID, showcase) 
-VALUES 
-(1, 1, TRUE),
-(2, 2, TRUE),
-(3, 3, FALSE),
-(4, 4, TRUE),
-(5, 5, FALSE),
-(6, 6, TRUE),
-(7, 7, FALSE),
-(8, 8, TRUE),
-(9, 9, FALSE);
+INSERT INTO collection (userID, bookID, showcase) VALUES
+(1, 1, 1),
+(1, 2, 1),
+(1, 3, 1),
+(1, 4, 0),
+(1, 5, 0),
+
+(2, 2, 1),
+(2, 3, 1),
+(2, 6, 1),
+(2, 7, 0),
+(2, 8, 0),
+
+(3, 9, 1),
+(3, 1, 1),
+(3, 2, 1),
+(3, 3, 0),
+(3, 10, 0),
+
+(4, 4, 1),
+(4, 5, 1),
+(4, 6, 1),
+(4, 1, 0),
+(4, 7, 0),
+
+(5, 1, 1),
+(5, 4, 1),
+(5, 5, 1),
+(5, 8, 0),
+(5, 9, 0),
+
+(6, 6, 1),
+(6, 7, 1),
+(6, 8, 1),
+(6, 3, 0),
+(6, 10, 0),
+
+(7, 9, 1),
+(7, 2, 1),
+(7, 4, 1),
+(7, 6, 0),
+(7, 8, 0),
+
+(8, 1, 1),
+(8, 7, 1),
+(8, 9, 1),
+(8, 2, 0),
+(8, 3, 0),
+
+(9, 6, 1),
+(9, 3, 1),
+(9, 5, 1),
+(9, 8, 0),
+(9, 4, 0),
+
+(10, 1, 1),
+(10, 9, 1),
+(10, 10, 1),
+(10, 7, 0),
+(10, 2, 0);
 
 Swap Table
-INSERT INTO swap (userID, bookID, desired_bookID) 
-VALUES 
-(1, 1, 2),
-(2, 2, 3),
-(3, 3, 4),
-(4, 4, 5),
-(5, 5, 6),
-(6, 6, 7),
-(7, 7, 8),
-(8, 8, 9),
-(9, 9, 1);
+INSERT INTO swap (requesterID, ownerID, bookID, status) VALUES
+(1, 2, 3, 'pending'),
+(3, 4, 5, 'accepted'),
+(2, 5, 6, 'declined'),
+(6, 7, 2, 'returned'),
+(4, 1, 1, 'pending'),
+(8, 9, 9, 'accepted'),
+(7, 10, 8, 'declined'),
+(9, 3, 4, 'returned'),
+(10, 6, 7, 'pending'),
+(5, 8, 5, 'accepted');
 
-Feedback TableINSERT INTO feedback (userID, bookID, comment) 
-VALUES 
-(1, 1, 'Amazing classic! A must-read.'),
-(2, 2, 'Very thought-provoking novel.'),
-(3, 3, 'One of the best books on justice and morality.'),
-(4, 4, 'A timeless romance story.'),
-(5, 5, 'Difficult read but rewarding.'),
-(6, 6, 'Incredible narrative and characters.'),
-(7, 7, 'A controversial but intriguing book.'),
-(8, 8, 'A masterpiece of fantasy literature.'),
-(9, 9, 'Thought-provoking dystopian novel.');
+Feedback Table
+INSERT INTO feedback (userID, bookID, comment, reply) VALUES
+(1, 1, 'A timeless classic.', 'Glad you enjoyed it!'),
+(2, 2, 'Very powerful story.', 'Yes, it’s one of my favorites too!'),
+(3, 3, 'A bit too dystopian for my taste.', NULL),
+(4, 4, 'Loved every page.', 'Happy to hear that!'),
+(5, 5, 'Couldn’t get into it.', NULL),
+(6, 6, 'Fascinating read.', 'Agreed, it’s a must-read.'),
+(7, 7, 'A bit long, but worth it.', NULL),
+(8, 8, 'Dark but compelling.', 'Totally!'),
+(9, 9, 'Brilliant and challenging.', 'Glad you appreciated it!'),
+(10, 10, 'A true epic.', NULL);
