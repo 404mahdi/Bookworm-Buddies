@@ -56,7 +56,7 @@
                 <br>
                 <label for="dob">Date of Birth:</label>
                 <br>
-                <input class="textbox" type="date" id="dob" name="dob" required>
+                <input class="textbox" type="date" name="dob" required>
                 <br>
                 <label for="email">Email:</label>
                 <br>
