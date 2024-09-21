@@ -70,7 +70,8 @@ $swapRequestsResult = $swapRequestsQuery->get_result();
         </div>
     <?php endwhile; ?>
 </div>
-</div>  
+</div>
+<?php include("./footer.php"); ?>
 </body>
 </html>
 

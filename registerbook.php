@@ -96,5 +96,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <p class="error-message"><?= htmlspecialchars($error) ?></p>
         <?php endif; ?>
     </div>
+    <?php include("./footer.php"); ?>
 </body>
 </html>

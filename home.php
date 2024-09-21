@@ -107,25 +107,14 @@ $checkExistingRequest->bind_param("i", $row['bookID']);
 $checkExistingRequest->execute();
 $existingRequestResult = $checkExistingRequest->get_result();
 
-if ($row['userID'] == $userID) {
-    // The user is the owner of the book, don't show any swap options
-    ?>
-    <?php
-} elseif ($existingRequestResult->num_rows > 0) {
+if ($existingRequestResult->num_rows > 0) {
     $existingRequestRow = $existingRequestResult->fetch_assoc();
-    if ($existingRequestRow['status'] == 'pending') {
-        // Display "Request Sent" button
-        ?>
-        <button class="btn-primary" disabled>Request Sent</button>
-        <?php
-    } elseif ($existingRequestRow['status'] == 'accepted') {
-        // Display "Not Available" button
+    if ($existingRequestRow['status'] == 'pending' || $existingRequestRow['status'] == 'accepted') {
         ?>
         <button class="btn-primary" disabled>Not Available</button>
         <?php
     }
 } else {
-    // Display "Request For Swap" button
     ?>
     <button onclick="window.location.href='requestbook.php?bookID=<?= $row['bookID'] ?>'" class="btn-primary">Request For Swap</button>
     <?php
@@ -137,6 +126,9 @@ if ($row['userID'] == $userID) {
         <?php else: ?>
             <p>No books found.</p>
         <?php endif; ?>
+        </div>
+        </div>
+        <button onclick="window.location.href='home.php'" class="btn-secondary">Back to Home</button>
         </div>
     </div>
 </div>

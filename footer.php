@@ -24,7 +24,7 @@
 <body>
     <footer>
         
-        <p>Bookworm Buddies, 2024</p>
+        <p>&copy Bookworm Buddies, 2024</p>
 
     </footer>
     
