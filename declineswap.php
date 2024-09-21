@@ -28,14 +28,6 @@ $updateSwapRequest = $conn->prepare("
 $updateSwapRequest->bind_param("i", $swapID);
 $updateSwapRequest->execute();
 
-// Send a notification to the requester
-$sendNotification = $conn->prepare("
-    INSERT INTO notifications (userID, message)
-    VALUES (?, 'Your swap request has been declined.')
-");
-$sendNotification->bind_param("i", $requesterID);
-$sendNotification->execute();
-
 // Redirect back to the requests page
 header("Location: requests.php");
 exit;

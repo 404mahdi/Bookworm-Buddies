@@ -9,11 +9,15 @@
   <body>
     <nav class="navbar">
       <div class="logo"><a href="home.php">BOOKWORM BUDDIES</a></div>
+      
+      <!-- Updated search form -->
       <div id="search-box">
-        <input type="text" id="search-bar" placeholder="Search..." />
-        <button id="search-btn">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
+        <form id="search-form" action="search.php" method="GET">
+          <input type="text" id="search-bar" name="q" placeholder="Search..." required />
+          <button type="submit" id="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
       </div>
       
       <ul class="nav-links">

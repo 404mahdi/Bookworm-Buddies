@@ -5,6 +5,7 @@ include 'fetchuserinfo.php';
 // Fetch swap requests
 $swapRequestsQuery = $conn->prepare("
     SELECT * FROM swap
+    JOIN books ON swap.bookID = books.bookID
     WHERE ownerID = ? OR requesterID = ?
 ");
 $swapRequestsQuery->bind_param("ii", $userID, $userID);
@@ -49,10 +50,11 @@ $swapRequestsResult = $swapRequestsQuery->get_result();
     <?php while ($swapRequestRow = $swapRequestsResult->fetch_assoc()): ?>
         <div class="swap-request">
             <h3>Swap Request Details</h3>
-            <p><strong>Book ID:</strong> <?= htmlspecialchars($swapRequestRow['bookID']) ?></p>
-            <p><strong>Requester ID:</strong> <?= htmlspecialchars($swapRequestRow['requesterID']) ?></p>
-            <p><strong>Owner ID:</strong> <?= htmlspecialchars($swapRequestRow['ownerID']) ?></p>
-            <p><strong>Status:</strong> <?= htmlspecialchars($swapRequestRow['status']) ?></p>
+            <p><strong>Book ID: </strong> <?= htmlspecialchars($swapRequestRow['bookID']) ?></p>
+            <p><strong>Book Title: </strong> <?= htmlspecialchars($swapRequestRow['title']) ?></p>
+            <p><strong>Requester ID: </strong> <?= htmlspecialchars($swapRequestRow['requesterID']) ?> </p>
+            <p><strong>Owner ID: </strong><?= htmlspecialchars($swapRequestRow['ownerID']) ?></p>
+            <p><strong>Status: </strong> <?= htmlspecialchars($swapRequestRow['status']) ?></p>
             
             <?php if ($swapRequestRow['status'] == 'pending' && $swapRequestRow['ownerID'] == $userID): ?>
                 <button onclick="window.location.href='acceptswap.php?swapID=<?= $swapRequestRow['swapID'] ?>'" class="btn-primary">Accept</button>
@@ -60,7 +62,7 @@ $swapRequestsResult = $swapRequestsQuery->get_result();
             <?php elseif ($swapRequestRow['status'] == 'pending' && $swapRequestRow['requesterID'] == $userID): ?>
                 <p class="waiting-msg">Waiting for owner's response...</p>
             <?php elseif ($swapRequestRow['status'] == 'accepted'): ?>
-                <p class="accepted-msg">Swap accepted! Complete the swap now.</p>
+                <p class="accepted-msg">Swap accepted!</p>
                 <button onclick="window.location.href='returnbook.php?swapID=<?= $swapRequestRow['swapID'] ?>'" class="btn-primary">Mark as Returned</button>
             <?php elseif ($swapRequestRow['status'] == 'declined'): ?>
                 <p class="declined-msg">Swap declined.</p>

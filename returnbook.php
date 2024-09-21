@@ -27,15 +27,6 @@ $updateSwapRequest = $conn->prepare("
 $updateSwapRequest->bind_param("i", $swapID);
 $updateSwapRequest->execute();
 
-// Send a notification to the other user
-$notifyUserID = ($swapRow['requesterID'] == $userID) ? $swapRow['ownerID'] : $swapRow['requesterID'];
-$sendNotification = $conn->prepare("
-    INSERT INTO notifications (userID, message)
-    VALUES (?, 'The other user has returned their book.')
-");
-$sendNotification->bind_param("i", $notifyUserID);
-$sendNotification->execute();
-
 // Redirect back to the requests page
 header("Location: requests.php");
 exit;
