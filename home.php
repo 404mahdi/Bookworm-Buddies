@@ -138,11 +138,14 @@ if ($row['userID'] == $userID) {
             <p>No books found.</p>
         <?php endif; ?>
         </div>
-        <button onclick="window.location.href='home.php'" class="btn-secondary">Back to Home</button>
     </div>
 </div>
+
+<?php include("./footer.php"); ?>
 </body>
 </html>
+
+
 
 <?php
 $booksFromAllUsers->close();
