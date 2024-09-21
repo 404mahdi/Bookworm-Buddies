@@ -56,6 +56,24 @@ $userResults = $userSearchQuery->get_result();
             text-align: center;
         }        
 
+        .container {
+            margin: 0 auto;
+            width: 50%;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        a {
+            color: #fa8748;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        a:hover {
+            color: #f7bca3;
+        }
     </style>
 
 </head>
@@ -64,6 +82,7 @@ $userResults = $userSearchQuery->get_result();
 
 <!-- Display book results -->
 <?php if ($bookResults->num_rows > 0): ?>
+    <div class="container">
     <h2>Books</h2>
     <ul>
         <?php while ($bookRow = $bookResults->fetch_assoc()): ?>
@@ -92,6 +111,7 @@ $userResults = $userSearchQuery->get_result();
             <?php endwhile; ?>
         </ul>
     <?php endif; ?>
+    </div>
 
     <!-- Close prepared statements -->
     <?php
