@@ -1,6 +1,6 @@
 Rashid: Feedback (deletefeedback, submitfeedback, replyfeedback), Search
 Shourove: Registerbook, deletebook, deleteaccount
-Mahdi: Home, Availablebooks, Showcase(removeshowcase), Collection
-Rauf: AcceptSwap, DeclineSwap, requestbook, requests 
+Mahdi: Collection(Home, Availablebooks, Showcase(removeshowcase), Collection)
+Rauf: Swap(AcceptSwap, DeclineSwap, requestbook, requests)
 
 Common: Signin, Signup, fetchuserinfo, header, footer, dbconnect
