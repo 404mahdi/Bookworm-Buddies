@@ -13,11 +13,12 @@ if (empty($searchQuery)) {
 // Escape special characters to prevent SQL injection
 $searchQuery = '%' . $conn->real_escape_string($searchQuery) . '%';
 
-// Search for books by title or author
 $bookSearchQuery = $conn->prepare("
-    SELECT bookID, title, author, year_published 
-    FROM books 
-    WHERE title LIKE ? OR author LIKE ?
+    SELECT books.bookID, books.title, books.author, books.year_published, users.userID, users.username AS owner_username 
+    FROM books
+    JOIN collection ON books.bookID = collection.bookID
+    JOIN users ON collection.userID = users.userID
+    WHERE (books.title LIKE ? OR books.author LIKE ?)
 ");
 $bookSearchQuery->bind_param("ss", $searchQuery, $searchQuery);
 $bookSearchQuery->execute();
@@ -44,28 +45,33 @@ $userResults = $userSearchQuery->get_result();
 <body>
     <h1>Search Results for "<?php echo htmlspecialchars($_GET['q']); ?>"</h1>
 
-    <!-- Display book results -->
-    <?php if ($bookResults->num_rows > 0): ?>
+<!-- Display book results -->
+<?php if ($bookResults->num_rows > 0): ?>
     <h2>Books</h2>
-        <ul>
-            <?php while ($bookRow = $bookResults->fetch_assoc()): ?>
-                <li>
-                    <strong><?php echo htmlspecialchars($bookRow['title']); ?></strong> by <?php echo htmlspecialchars($bookRow['author']); ?>
-                    (Published: <?php echo htmlspecialchars($bookRow['year_published']); ?>)
-                </li>
-            <?php endwhile; ?>
-        </ul>
-    <?php endif; ?>
+    <ul>
+        <?php while ($bookRow = $bookResults->fetch_assoc()): ?>
+            <li>
+                <strong><?php echo htmlspecialchars($bookRow['title']); ?></strong> by <?php echo htmlspecialchars($bookRow['author']); ?>
+                (Published: <?php echo htmlspecialchars($bookRow['year_published']); ?>)
+                <br />
+                <!-- Fetch and display the owner's name -->
+                Owned by: 
+                <a href="profile.php?userID=<?php echo htmlspecialchars($bookRow['userID']); ?>">
+                    <?php echo htmlspecialchars($bookRow['owner_username']); ?>
+                </a>
+            </li>
+        <?php endwhile; ?>
+    </ul>
+<?php endif; ?>
+
 
     <!-- Display user results -->
     <?php if ($userResults->num_rows > 0): ?>
     <h2>Users</h2>
         <ul>
             <?php while ($userRow = $userResults->fetch_assoc()): ?>
-                <li>
-                    <strong><?php echo htmlspecialchars($userRow['username']); ?></strong>
-                    (Name: <?php echo htmlspecialchars($userRow['first_name'] . ' ' . $userRow['last_name']); ?>)
-                </li>
+                    <p><b>Name: </b><?php echo htmlspecialchars($userRow['first_name'] . ' ' . $userRow['last_name']); ?></p>
+                    <b>Username: </b><strong><a href="profile.php?userID=<?php echo htmlspecialchars($userRow['userID']); ?>"><?php echo htmlspecialchars($userRow['username']); ?></a></strong>
             <?php endwhile; ?>
         </ul>
     <?php endif; ?>
