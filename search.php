@@ -59,7 +59,7 @@ $userResults = $userSearchQuery->get_result();
         .container {
             margin: 0 auto;
             width: 50%;
-            padding: 10px;
+            padding: 20px;
             background-color: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
         }
@@ -73,6 +73,25 @@ $userResults = $userSearchQuery->get_result();
 
         a:hover {
             color: #f7bca3;
+        }
+        .btn-primary {
+            background-color: #fa8748;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            font-weight: bold;
+            }
+
+        .btn-primary:hover {
+            background-color: #f36f21;
+            }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
         }
     </style>
 
@@ -99,8 +118,9 @@ $userResults = $userSearchQuery->get_result();
         <?php endwhile; ?>
     </ul>
 <?php endif; ?>
+    </div>
 
-
+    <div class="container">
     <!-- Display user results -->
     <?php if ($userResults->num_rows > 0): ?>
     <h2>Users</h2>
@@ -111,7 +131,11 @@ $userResults = $userSearchQuery->get_result();
             <?php endwhile; ?>
         </ul>
     <?php endif; ?>
+    
+    <button onclick="window.location.href='home.php'" class="btn-primary">Back to Home</button>
     </div>
+    
+    
 
     <!-- Close prepared statements -->
     <?php

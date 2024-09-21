@@ -128,7 +128,6 @@ if ($existingRequestResult->num_rows > 0) {
         <?php endif; ?>
         </div>
         </div>
-        <button onclick="window.location.href='home.php'" class="btn-secondary">Back to Home</button>
         </div>
     </div>
 </div>
