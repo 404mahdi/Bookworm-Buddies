@@ -9,15 +9,6 @@ if (filter_var($swapID, FILTER_VALIDATE_INT) === false) {
     exit;
 }
 
-// Fetch the swap request details
-$fetchSwap = $conn->prepare("
-    SELECT requesterID, ownerID FROM swap WHERE swapID = ?
-");
-$fetchSwap->bind_param("i", $swapID);
-$fetchSwap->execute();
-$fetchSwapResult = $fetchSwap->get_result();
-$swapRow = $fetchSwapResult->fetch_assoc();
-
 // Update the swap request status to "returned"
 $updateSwapRequest = $conn->prepare("
     UPDATE swap

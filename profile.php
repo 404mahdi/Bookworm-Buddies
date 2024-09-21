@@ -54,7 +54,8 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                 <p>Email: <b><?= htmlspecialchars($user['email']) ?></b></p>
                 <p>Date of Birth: <b><?= htmlspecialchars($user['date_of_birth']) ?></b></p>
                 <p>Username: <b><?= htmlspecialchars($user['username']) ?></b></p>
-                <!-- Only show update and logout buttons if the logged-in user is viewing their own profile -->
+                
+                <!-- Show update, delete and logout buttons only if the logged-in user is viewing their own profile -->
                 <?php if ($viewingUser == $userID): ?>
                     <button onclick="window.location.href='updateprofile.php'" class="btn-primary">Update Profile</button>
                     <button onclick="confirmDeleteAccount()" class="btn-primary">Delete Account</button>

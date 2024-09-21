@@ -87,19 +87,6 @@ INSERT INTO collection (userID, bookID, showcase) VALUES
 (10, 7, 0),
 (10, 2, 0);
 
-Swap Table
-INSERT INTO swap (requesterID, ownerID, bookID, status) VALUES
-(1, 2, 3, 'pending'),
-(3, 4, 5, 'accepted'),
-(2, 5, 6, 'declined'),
-(6, 7, 2, 'returned'),
-(4, 1, 1, 'pending'),
-(8, 9, 9, 'accepted'),
-(7, 10, 8, 'declined'),
-(9, 3, 4, 'returned'),
-(10, 6, 7, 'pending'),
-(5, 8, 5, 'accepted');
-
 Feedback Table
 INSERT INTO feedback (userID, bookID, comment, reply) VALUES
 (1, 1, 'A timeless classic.', 'Glad you enjoyed it!'),

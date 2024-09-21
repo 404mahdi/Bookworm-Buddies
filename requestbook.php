@@ -45,7 +45,7 @@ $insertSwapRequest = $conn->prepare("
     INSERT INTO swap (requesterID, ownerID, bookID, status)
     VALUES (?, ?, ?, 'pending')
 ");
-$insertSwapRequest->bind_param("iii", $userID, $ownerID, $bookID); // Handle null properly
+$insertSwapRequest->bind_param("iii", $userID, $ownerID, $bookID);
 
 // Execute the query and check for errors
 if ($insertSwapRequest->execute()) {

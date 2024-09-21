@@ -2,11 +2,6 @@
 session_start();
 include 'dbconnect.php';
 
-// Enable error reporting
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 # Retrieve user ID and username from the session
 $userID = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';

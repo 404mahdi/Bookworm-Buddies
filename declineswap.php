@@ -9,16 +9,6 @@ if (filter_var($swapID, FILTER_VALIDATE_INT) === false) {
     exit;
 }
 
-// Fetch the requesterID for sending notification
-$fetchRequester = $conn->prepare("
-    SELECT requesterID FROM swap WHERE swapID = ?
-");
-$fetchRequester->bind_param("i", $swapID);
-$fetchRequester->execute();
-$fetchRequesterResult = $fetchRequester->get_result();
-$requesterRow = $fetchRequesterResult->fetch_assoc();
-$requesterID = $requesterRow['requesterID'] ?? 0;
-
 // Update the swap request status to "declined"
 $updateSwapRequest = $conn->prepare("
     UPDATE swap
