@@ -8,6 +8,7 @@ $booksFromAllUsers = $conn->prepare("
     JOIN books ON collection.bookID = books.bookID
     JOIN users ON collection.userID = users.userID
     WHERE collection.showcase = 1
+    AND users.userID != $viewingUser
 ");
 
 $booksFromAllUsers->execute();
@@ -95,14 +96,14 @@ $result = $booksFromAllUsers->get_result();
                     <h2>Title: <?= htmlspecialchars($row['title']) ?></h2>
                     <p><b>Author:</b> <?= htmlspecialchars($row['author']) ?></p>
                     <p><b>Published Year:</b> <?= htmlspecialchars($row['year_published']) ?></p>
-                    <p><b>Owner:</b> <a href="profile.php?userID=<?= htmlspecialchars($row['userID']) ?>" class="link"><?= htmlspecialchars($row['username']) ?></a></p>
+                    <p><b>Owner:</b> <a class="link" href="profile.php?userID=<?= htmlspecialchars($row['userID']) ?>" ><?= htmlspecialchars($row['username']) ?></a></p>
                     
                     <?php
 $checkExistingRequest = $conn->prepare("
     SELECT * FROM swap
-    WHERE requesterID = ? AND bookID = ? AND status IN ('pending', 'accepted')
+    WHERE  bookID = ? AND status IN ('pending', 'accepted')
 ");
-$checkExistingRequest->bind_param("ii", $userID, $row['bookID']);
+$checkExistingRequest->bind_param("i", $row['bookID']);
 $checkExistingRequest->execute();
 $existingRequestResult = $checkExistingRequest->get_result();
 
@@ -131,7 +132,7 @@ if ($row['userID'] == $userID) {
 }
 ?>
 
-                </div>
+            </div>
             <?php endwhile; ?>
         <?php else: ?>
             <p>No books found.</p>

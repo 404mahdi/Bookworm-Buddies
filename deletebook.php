@@ -16,8 +16,8 @@ if (isset($_GET['bookID'])) {
         $deleteFromCollection->close();
 
         //Delete from `swap` table (if any swaps are related to this book)
-        $deleteFromSwap = $conn->prepare("DELETE FROM swap WHERE bookID = ? OR desired_bookID = ?");
-        $deleteFromSwap->bind_param("ii", $bookID, $bookID);
+        $deleteFromSwap = $conn->prepare("DELETE FROM swap WHERE bookID = ?");
+        $deleteFromSwap->bind_param("i", $bookID);
         $deleteFromSwap->execute();
         $deleteFromSwap->close();
 

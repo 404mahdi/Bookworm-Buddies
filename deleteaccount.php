@@ -1,6 +1,5 @@
 <?php
-session_start();
-include 'dbconnect.php';
+include 'fetchuserinfo.php';
 
 // Check if user is logged in
 $userID = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
@@ -20,9 +19,9 @@ try {
     $deleteFeedback->execute();
     $deleteFeedback->close();
 
-    // Delete book swaps
-    $deleteSwaps = $conn->prepare("DELETE FROM swap WHERE userID = ?");
-    $deleteSwaps->bind_param("i", $userID);
+    // Delete book swaps where the user is either the requester or the owner
+    $deleteSwaps = $conn->prepare("DELETE FROM swap WHERE requesterID = ? OR ownerID = ?");
+    $deleteSwaps->bind_param("ii", $userID, $userID);
     $deleteSwaps->execute();
     $deleteSwaps->close();
 

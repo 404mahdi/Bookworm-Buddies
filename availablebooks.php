@@ -11,6 +11,7 @@ $availableBooksQuery = $conn->prepare("
     LEFT JOIN swap ON books.bookID = swap.bookID AND swap.status IN ('pending', 'accepted')
     WHERE collection.showcase = 1
     AND swap.bookID IS NULL
+    AND users.userID != $viewingUser
 ");
 
 $availableBooksQuery->execute();
